@@ -1,11 +1,15 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const handleLoginSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
     console.log("Google user info:", decoded);
     localStorage.setItem("user", JSON.stringify(decoded));
+    navigate("/");
   };
 
   const handleLoginError = () => {
